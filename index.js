@@ -13,12 +13,12 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
 app.get('/api/users', (req, res) => {
-  res.json(Database.map(x => {x.username,x._id}))
+  res.json(Database)
 })
-app.get('api/users/:_id/', (req, res) => { //TODO
+app.get('/api/users/:_id/', (req, res) => { //TODO
   res.json(Database.find(x => x._id == req.params._id))
 })
-app.get('api/users/:_id/logs', (req, res) => { //TODO
+app.get('/api/users/:_id/logs', (req, res) => { //TODO
   res.json(Database.find(x => x._id == req.params._id))
 })
 

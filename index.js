@@ -31,6 +31,7 @@ app.post('/api/users', (req, res) => {
 app.post('/api/users/:_id/exercises', (req, res) => {        //TODO
   const user = Database.find(x => x._id == req.params._id)
   const date = new Date(req.body.date) || new Date()
+  console.log(req.body.date, date)
   user.log.push({description: req.body.description, duration: +req.body.duration, date: date.toDateString()})
   user.count++
   res.json({username: user.username, description: req.body.description, duration: +req.body.duration, date: date.toDateString(), _id: user._id})

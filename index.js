@@ -7,7 +7,7 @@ const Database = []
 
 app.use(cors())
 app.use(express.static('public'))
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
@@ -16,6 +16,9 @@ app.get('/api/users', (req, res) => {
   res.json(Database)
 })
 app.get('api/users/:_id/', (req, res) => { //TODO
+  res.json(Database.find(x => x._id == req.params._id))
+})
+app.get('api/users/:_id/logs', (req, res) => { //TODO
   res.json(Database.find(x => x._id == req.params._id))
 })
 

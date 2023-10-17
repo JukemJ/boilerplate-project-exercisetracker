@@ -19,7 +19,14 @@ app.get('/api/users/:_id/', (req, res) => { //TODO
   res.json(Database.find(x => x._id == req.params._id))
 })
 app.get('/api/users/:_id/logs', (req, res) => { //TODO
-  res.json(Database.find(x => x._id == req.params._id))
+  const user = Database.find(x => x._id == req.params._id)
+  const userlog = user.log
+  const {from, to, limit} = req.query
+  if(from) log = log.filter(x => x.date.getTime() >= new Date(from).getTime())
+  if(to) log = log.filter(x => x.date.getTime() <= new Date(from).getTime())
+  if(limit) log = log.slice(0,limit)
+  user.log = userlog
+  res.json(user)
 })
 
 app.post('/api/users', (req, res) => {       

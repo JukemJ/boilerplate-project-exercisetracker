@@ -23,7 +23,7 @@ app.get('/api/users/:_id/logs', (req, res) => { //TODO
   const userlog = user.log
   const {from, to, limit} = req.query
   if(from) log = log.filter(x => x.date.getTime() >= new Date(from).getTime())
-  if(to) log = log.filter(x => x.date.getTime() <= new Date(from).getTime())
+  if(to) log = log.filter(x => x.date.getTime() <= new Date(to).getTime())
   if(limit) log = log.slice(0,limit)
   user.log = userlog
   res.json(user)

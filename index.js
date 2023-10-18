@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 });
 app.get('/api/users', (req, res) => {
   console.log(Database.every(x => typeof x == 'object'))
-  return res.json(Database.map(x => new Object({username: x.username, _id: x._id})))
+  return res.json(Database.map(x => new Object({username: x.username, _id: x._id.toString()})))
 })
 app.get('/api/users/:_id/', (req, res) => { //TODO
   res.json(Database.find(x => x._id == req.params._id))
@@ -38,7 +38,6 @@ app.post('/api/users', (req, res) => {
 app.post('/api/users/:_id/exercises', (req, res) => {        //TODO
   const user = Database.find(x => x._id == req.params._id)
   const date = req.body.date ? new Date(req.body.date) : new Date()
-  console.log(Database)
   user.log.push({description: req.body.description, duration: +req.body.duration, date: date.toDateString()})
   user.count++
   res.json({username: user.username, description: req.body.description, duration: +req.body.duration, date: date.toDateString(), _id: user._id})

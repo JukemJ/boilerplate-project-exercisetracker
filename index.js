@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 });
 app.get('/api/users', (req, res) => {
   console.log(Database.every(x => typeof x == 'object'))
-  res.json(Database)
+  return res.json(Database)
 })
 app.get('/api/users/:_id/', (req, res) => { //TODO
   res.json(Database.find(x => x._id == req.params._id))

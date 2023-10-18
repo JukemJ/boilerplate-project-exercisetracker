@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
 app.get('/api/users', (req, res) => {
+  console.log(Database.every(x => typeof x == 'object'))
   res.json(Database)
 })
 app.get('/api/users/:_id/', (req, res) => { //TODO

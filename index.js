@@ -20,13 +20,12 @@ app.get('/api/users/:_id/', (req, res) => { //TODO
 })
 app.get('/api/users/:_id/logs', (req, res) => { //TODO
   const user = Database.find(x => x._id == req.params._id)
-  const userlog = user.log
+  let userlog = user.log
   const {from, to, limit} = req.query
-  if(from) log = log.filter(x => x.date.getTime() >= new Date(from).getTime())
-  if(to) log = log.filter(x => x.date.getTime() <= new Date(to).getTime())
-  if(limit) log = log.slice(0,limit)
-  user.log = userlog
-  res.json(user)
+  if(from) userlog = userlog.filter(x => new Date(x.date).getTime() >= new Date(from).getTime())
+  if(to) userlog = userlog.filter(x => new Date(x.date).getTime() <= new Date(to).getTime())
+  if(limit) userlog = userlog.slice(0,limit)
+  res.json({username: user.username, count: user.count, _id: user._id, log: userlog})
 })
 
 app.post('/api/users', (req, res) => {       
